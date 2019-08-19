@@ -1,0 +1,12 @@
+/* .text-bold {
+    font-weight: 2000 !important;
+} */
+
+.m-0 {
+    margin: 0px !important;
+}
+
+.tab {
+    /* height: 500px !important; */
+    overflow-y: auto !important;
+}
