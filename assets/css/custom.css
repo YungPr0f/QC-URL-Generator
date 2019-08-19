@@ -1,12 +1,54 @@
-/* .text-bold {
-    font-weight: 2000 !important;
-} */
-
 .m-0 {
     margin: 0px !important;
 }
 
 .tab {
-    /* height: 500px !important; */
     overflow-y: auto !important;
+}
+
+.x-scroll {
+    overflow-x: scroll !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.y-scroll {
+    overflow-y: scroll !important;
+}
+
+.h-50 {
+    height: 310px !important;
+}
+
+.ui.table thead tr:first-child > th {
+    position: sticky !important;
+    top: 0;
+    z-index: 2;
+}
+
+.d-inline {
+    display: inline !important;
+}
+
+.single-line {
+    white-space: nowrap !important;
+}
+
+.fixed-table {
+    table-layout: fixed !important;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.x-padded {
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+}
+
+.center_input {
+    text-align: center !important;
 }

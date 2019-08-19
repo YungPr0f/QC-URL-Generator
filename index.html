@@ -11,76 +11,34 @@
 <body>
 
     <style>
-        .x-scroll {
-            overflow-x: scroll !important;
-        }
-
-        .d-block {
-            display: block !important;
-        }
-
-        .y-scroll {
-            overflow-y: scroll !important;
-        }
-
-        .h-50 {
-            height: 310px !important;
-        }
-
-        .ui.table thead tr:first-child > th {
-            position: sticky !important;
-            top: 0;
-            z-index: 2;
-        }
-
-        .d-inline {
-            display: inline !important;
-        }
-
-        .single-line {
-            white-space: nowrap !important;
-        }
-
-        .fixed-table {
-            table-layout: fixed !important;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .x-padded {
-            padding-right: 20px !important;
-            padding-left: 20px !important;
-        }
+        
 
     </style>
     
     <section>
-    <div class="ui middle aligned very padded x-padded grid">
-        <!-- <div class="ui one wide column"></div> -->
-        <div class="ui three wide column">
-            <div class="ui fluid image">
-                <img src="assets/img/Jumia-Logo.jpg">
-            </div>
-        </div>
-        <div class="ui ten wide column">
-            <div class="ui centered huge header">
-                QC URL Generator
-            </div>
-        </div>
-        <div class="ui three wide center aligned column">
-            <div class="ui centered header m-0">
-                <div class="sub header">
-                    Designed By:
+        <div class="ui middle aligned very padded x-padded grid">
+            <div class="ui three wide column">
+                <div class="ui fluid image">
+                    <img src="assets/img/Jumia-Logo.jpg">
                 </div>
-                Yung_Prof
             </div>
-            <a href="mailto:omotoyosi.yusuf@jumia.com" class="ui text">omotoyosi.yusuf@jumia.com</a>
+            <div class="ui ten wide column">
+                <div class="ui centered huge header">
+                    QC URL Generator
+                </div>
+            </div>
+            <div class="ui three wide center aligned column">
+                <div class="ui centered header m-0">
+                    <div class="sub header">
+                        Designed By:
+                    </div>
+                    Yung_Prof
+                </div>
+                <a href="mailto:omotoyosi.yusuf@jumia.com" class="ui text">omotoyosi.yusuf@jumia.com</a>
+            </div>
         </div>
-    </div>
-    
-        
+        <hr style="margin:0;">
+        <br>
         <br>
     </section>
 
@@ -92,7 +50,6 @@
                     <div class="ui segment">
                         <form action="" class="ui large form">
                             <div class="field">
-                                <!-- <label for="">Paste SKUs Here</label> -->
                                 <textarea name="source_skus" id="" cols="30" rows="11" placeholder=""></textarea>
                                 <div class="ui tiny message">
                                     <span class="ui text">Total = <div class="ui tiny header d-inline">?</div> SKUs</span>
@@ -102,12 +59,12 @@
                     </div>
                 </div>
                 <div class="two wide center aligned middle aligned column">
-                    <form action="" class="ui form">
+                    <form action="" class="ui huge form">
                         <div class="field">
                             <label for="">Chunk Size</label>
-                            <input type="text" class="chunk_size" id="">
+                            <input type="text" class="center_input chunk_size" id="">
                         </div>
-                        <button class="ui fluid orange icon button generate">
+                        <button class="ui fluid orange icon huge button generate">
                             <i class="ui large double angle right icon"></i>
                         </button>
                     </form>
@@ -126,7 +83,6 @@
                 </div>
                 <div class="ui seven wide column">
                     <div class="ui large header">Result</div>
-                    <!--  -->
                     <div class="ui segment">
                         <div class="ui fixed table x-scroll h-50 y-scroll">
                             <table class="ui celled unstackable table">
@@ -240,21 +196,21 @@
                                 $('.result-body').append('<td class="top aligned">'+chunked_sku+'</td>');
 
                                 $('.link-data').append(`
-                                                        <tr>
-                                                            <td class="two wide single line right aligned">`+h_counter+` - `+l_counter+`</td>
-                                                            <td class="ui twelve wide link x-scroll single-line">https://jumia.com.ng/catalog?q=`+string_sku+`</td>
-                                                            <td class="one wide center aligned">
-                                                                <div class="ui icon copy_link button" data-tooltip="Copy Link">
-                                                                    <i class="ui copy icon"></i>
-                                                                </div>
-                                                            </td>
-                                                            <td class="one wide ui center aligned">
-                                                                <a href="https://jumia.com.ng/catalog?q=`+link_sku+`" target="_blank" class="ui basic icon open_link button m-0" data-tooltip="Open Link">
-                                                                    <i class="ui blue external alternate icon"></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                        `);
+                                    <tr>
+                                        <td class="two wide single line right aligned">`+h_counter+` - `+l_counter+`</td>
+                                        <td class="ui twelve wide link x-scroll single-line">https://jumia.com.ng/catalog?q=`+string_sku+`</td>
+                                        <td class="one wide center aligned">
+                                            <div class="ui icon copy_link button" data-tooltip="Copy Link">
+                                                <i class="ui copy icon"></i>
+                                            </div>
+                                        </td>
+                                        <td class="one wide ui center aligned">
+                                            <a href="https://jumia.com.ng/catalog?q=`+link_sku+`" target="_blank" class="ui basic icon open_link button m-0" data-tooltip="Open Link">
+                                                <i class="ui blue external alternate icon"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                `);
                                 
                                 h_counter = l_counter + 1;
                                 l_counter = l_counter + chunks;
