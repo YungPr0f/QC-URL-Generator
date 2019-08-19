@@ -161,12 +161,10 @@
                     for (var i = 0; i < line_count.length; i++) {
                         if(line_count[i].length > 0) sku_count++;
                     }
-                    if(sku_count < 1000) {
+                    if(sku_count < 1000 && $('input.chunk_size').val() == 1000) {
                         $('input.chunk_size').val(sku_count);
                     }
                     $('.ui.tiny.header').text(sku_count);
-                    // $('.ui.message').show();
-
 
 
 
@@ -279,6 +277,8 @@
                 $('.result-head,.result-body,.link-data').empty();
                 $('textarea,input').val('');
                 $('.ui.tiny.header').text('?');
+                $('.copy_all.button').addClass('hidden');
+                window.scrollTo(0,0);
             });
 
         });
