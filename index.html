@@ -9,11 +9,6 @@
     <title>QC URL Generator</title>
 </head>
 <body>
-
-    <style>
-        
-
-    </style>
     
     <section>
         <div class="ui middle aligned very padded x-padded grid">
@@ -37,12 +32,12 @@
                 <a href="mailto:omotoyosi.yusuf@jumia.com" class="ui text">omotoyosi.yusuf@jumia.com</a>
             </div>
         </div>
-        <hr style="margin:0;">
+        <hr class="m-0">
         <br>
         <br>
     </section>
 
-    <section>
+    <section class="mb-50">
         <div class="ui container">
             <div class="ui grid">
                 <div class="ui seven wide column">
@@ -62,13 +57,18 @@
                     <form action="" class="ui huge form">
                         <div class="field">
                             <label for="">Chunk Size</label>
-                            <input type="text" class="center_input chunk_size" id="">
+                            <input type="text" class="chunk_size" id="" value="1000">
                         </div>
-                        <button class="ui fluid orange icon huge button generate">
+                        <button class="ui fluid huge orange icon button generate">
                             <i class="ui large double angle right icon"></i>
+                        </button>
+                        <br>
+                        <button class="ui fluid basic blue icon huge button refresh">
+                            <i class="ui large double undo icon"></i>
                         </button>
                     </form>
                     <div class="ui mini modal">
+                        <i class="close icon"></i>
                         <div class="header">Error</div>
                         <div class="content">
                             <p class="ui text">No SKUs Pasted</p>
@@ -83,6 +83,7 @@
                 </div>
                 <div class="ui seven wide column">
                     <div class="ui large header">Result</div>
+                    <!--  -->
                     <div class="ui segment">
                         <div class="ui fixed table x-scroll h-50 y-scroll">
                             <table class="ui celled unstackable table">
@@ -96,7 +97,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        
                     </div>
                 </div>
             </div>
@@ -107,12 +107,14 @@
                         <thead class="link-head">
                         </thead>
                         <tbody class="link-data">
-                            
                         </tbody>
                     </table>
-                    <div class="ui large right floated blue button" data-tooltip="Coming Soon">Copy All</div>
+                    <div class="ui large right floated blue copy_all button hidden" data-tooltip="Copy All Links">Copy All</div>
                     <div class="ui fluid input copy_input hidden">
                         <input type="text" placeholder="">
+                    </div>
+                    <div class="ui fluid input copy_all_textarea hidden">
+                        <textarea name="" id="" rows="10" cols="100"></textarea>
                     </div>
                 </div>
             </div>
@@ -136,10 +138,13 @@
                 $(this).val(text);
             });
 
+            $('button.generate').mousedown(function() {
+                $(this).addClass('loading');
+            });
+
             $('button.generate').click(function (e) {
 
                 e.preventDefault();
-                $(this).addClass('loading');
 
                 $('.result-head,.result-body,.link-data').empty();
 
@@ -156,8 +161,12 @@
                     for (var i = 0; i < line_count.length; i++) {
                         if(line_count[i].length > 0) sku_count++;
                     }
+                    if(sku_count < 1000) {
+                        $('input.chunk_size').val(sku_count);
+                    }
                     $('.ui.tiny.header').text(sku_count);
-                    $('.ui.message').show();
+                    // $('.ui.message').show();
+
 
 
 
@@ -167,7 +176,7 @@
                     var chunksize = $('input.chunk_size').val();
                     if(chunksize == "") {
                         $('.chunk_size').parent().addClass('ui error');
-                        $('.modal').find('.text').text('Invalid Chunk Size');
+                        $('.modal').find('.text').text('Please Enter a Chunk Size');
                         $('.modal').modal('show');
                     } else {
                         var chunks = parseInt(chunksize);
@@ -196,25 +205,28 @@
                                 $('.result-body').append('<td class="top aligned">'+chunked_sku+'</td>');
 
                                 $('.link-data').append(`
-                                    <tr>
-                                        <td class="two wide single line right aligned">`+h_counter+` - `+l_counter+`</td>
-                                        <td class="ui twelve wide link x-scroll single-line">https://jumia.com.ng/catalog?q=`+string_sku+`</td>
-                                        <td class="one wide center aligned">
-                                            <div class="ui icon copy_link button" data-tooltip="Copy Link">
-                                                <i class="ui copy icon"></i>
-                                            </div>
-                                        </td>
-                                        <td class="one wide ui center aligned">
-                                            <a href="https://jumia.com.ng/catalog?q=`+link_sku+`" target="_blank" class="ui basic icon open_link button m-0" data-tooltip="Open Link">
-                                                <i class="ui blue external alternate icon"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                `);
+                                                        <tr>
+                                                            <td class="two wide single line right aligned">`+h_counter+` - `+l_counter+`</td>
+                                                            <td class="ui twelve wide link x-scroll single-line">https://jumia.com.ng/catalog?q=`+string_sku+`</td>
+                                                            <td class="one wide center aligned">
+                                                                <div class="ui icon copy_link button" data-tooltip="Copy Link">
+                                                                    <i class="ui copy icon"></i>
+                                                                </div>
+                                                            </td>
+                                                            <td class="one wide ui center aligned">
+                                                                <a href="https://jumia.com.ng/catalog?q=`+link_sku+`" target="_blank" class="ui basic icon open_link button m-0" data-tooltip="Open Link">
+                                                                    <i class="ui blue external alternate icon"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        `);
                                 
                                 h_counter = l_counter + 1;
                                 l_counter = l_counter + chunks;
                             }
+
+                            $('.copy_all.button').removeClass('hidden');
+
                         }
 
                     }
@@ -224,6 +236,7 @@
                 }
 
                 $('button.generate').removeClass('loading');
+
 
                 $('table').find('.copy_link').click(function() {
                     var link = $(this).parents('td').siblings('td').children('a').attr('href').trim();
@@ -240,9 +253,33 @@
                     
                 });
 
+                $('.copy_all').click(function() {
+                    var links = $(this).siblings('table').find('tr').children('td:nth-child(2)').text();
+                    // var all_links = links.replace(/,/g, '%2C').replace(/Zhttps/g, 'Z\nhttps');
+                    var all_links = links.replace(/https/g, function(match, offset, all) { 
+                        return match === "https" ? (all.indexOf("https") === offset ? 'https' : '\nhttps') : '\nhttps'; 
+                    });
+                    $(this).siblings('.copy_all_textarea').find('textarea').val(all_links);
+                    $('.copy_all_textarea').removeClass('hidden');
+                    $('.copy_all_textarea').find('textarea').select();
+                    document.execCommand("copy");
+                    $('.copy_all_textarea').addClass('hidden');
+                    $(this).attr('data-tooltip', 'All Links Copied!');
+                    $(this).mouseleave(function() {
+                        $(this).attr('data-tooltip', 'Copy All Links');
+                    });
+
+                });
+
 
             });
 
+            $('button.refresh').click(function(e) {
+                e.preventDefault();
+                $('.result-head,.result-body,.link-data').empty();
+                $('textarea,input').val('');
+                $('.ui.tiny.header').text('?');
+            });
 
         });
         

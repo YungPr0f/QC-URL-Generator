@@ -49,6 +49,14 @@
     padding-left: 20px !important;
 }
 
-.center_input {
+input.chunk_size {
     text-align: center !important;
+}
+
+.mb-20 {
+    margin-bottom: 20px !important;
+}
+
+.mb-50 {
+    margin-bottom: 50px !important;
 }
